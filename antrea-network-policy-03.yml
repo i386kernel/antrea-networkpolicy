@@ -1,0 +1,12 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-traffic-secops
+  namespace: np-test
+spec:
+  priority: 6
+  tier: securityops
+  appliedTo:
+    - podSelector: {}
+  ingress:
+   - action: Drop

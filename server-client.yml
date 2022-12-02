@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grey-client
+  labels:
+    app: centos
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: centos
+      name: grey-client
+    spec:
+      containers:
+        - name: grey-client
+          image: centos:8
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 365d; done;" ]
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: centos
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  labels:
+    app: centos
+    type: client
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: client
+      labels:
+        app: centos
+        type: client
+    spec:
+      containers:
+        - name: centos
+          image: centos:8
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 365d; done;" ]
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: centos
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rouge-client
+  labels:
+    app: centos
+    type: rouge-client
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: rouge-client
+      labels:
+        app: centos
+        type: rouge-client
+    spec:
+      containers:
+        - name: centos
+          image: centos:8
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 365d; done;" ]
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: centos
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-server
+  labels:
+    app: nginx-server
+    type: server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: nginx-server
+      labels:
+        app: nginx-server
+        type: server
+    spec:
+      containers:
+        - name: nginx-server
+          image: nginx:stable
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: nginx-server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  selector:
+    app: nginx-server
+  ports:
+    - port: 8080
+      targetPort: 80
+  type: LoadBalancer

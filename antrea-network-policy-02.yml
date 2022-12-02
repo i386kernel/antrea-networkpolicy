@@ -1,0 +1,39 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-anp
+  namespace: np-test
+spec:
+  priority: 5
+  tier: baseline
+  appliedTo:
+    - podSelector:
+        matchLabels:
+          type: server
+  ingress:
+    - name: deny-all-traffic
+      action: Allow
+      from:
+        - podSelector:
+            matchLabels:
+              type: client
+      ports:
+        - protocol: TCP
+          port: 8080
+      enableLogging: false
+    - name: DenyFromRougeClient
+      action: Drop
+      from:
+        - podSelector:
+            matchLabels:
+              type: rouge-client
+  egress:
+    - action: Drop
+      to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+      ports:
+        - protocol: TCP
+          port: 80
+      name: DropToThirdParty
+      enableLogging: true
