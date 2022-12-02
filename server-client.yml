@@ -1,3 +1,4 @@
+# Server Client for Antrea NetworkPolicies POC
 apiVersion: apps/v1
 kind: Deployment
 metadata:
