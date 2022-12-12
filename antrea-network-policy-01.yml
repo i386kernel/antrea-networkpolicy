@@ -1,3 +1,4 @@
+# Antrea network policy to allow ingress traffic through matchLabels and drop egress traffic to subnet
 apiVersion: crd.antrea.io/v1alpha1
 kind: NetworkPolicy
 metadata:

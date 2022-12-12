@@ -1,3 +1,4 @@
+# NetworkPolicy to deny all traffic to all pods within a namespace
 apiVersion: crd.antrea.io/v1alpha1
 kind: NetworkPolicy
 metadata:
