@@ -1,0 +1,30 @@
+apiVersion: security.antrea.tanzu.vmware.com/v1alpha1
+kind: ClusterNetworkPolicy
+metadata:
+  name: acnp-with-cp
+spec:
+  priority: 8
+  tier: securityops
+  appliedTo:
+    - group: "test-cg-with-db-selector"
+  ingress:
+    - action: Allow
+      from:
+        - group: "test-cg-with-frontend-selector"
+      ports:
+        - protocol: TCP
+          port: 8080
+          endPort: 9000
+        - protocol: TCP
+          port: 6379
+      name: AllowFromFrontend
+      enableLogging: false
+  egress:
+    - action: Drop
+      to:
+        - group: "test-cg-with-ip-block"  
+      ports:
+        - protocol: TCP
+          port: 5978
+      name: DropToThirdParty
+      enableLogging: true

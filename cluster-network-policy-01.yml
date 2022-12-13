@@ -1,3 +1,4 @@
+# CNP with Stand-Alone selectors
 apiVersion: crd.antrea.io/v1alpha1
 kind: ClusterNetworkPolicy
 metadata:

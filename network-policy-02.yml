@@ -1,3 +1,4 @@
+# Antrea network policy to deny/allow ingress traffic from a particular label and drop traffic to particular ipBlock
 apiVersion: crd.antrea.io/v1alpha1
 kind: NetworkPolicy
 metadata:

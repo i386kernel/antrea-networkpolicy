@@ -1,0 +1,7 @@
+apiVersion: core.antrea.tanzu.vmware.com/v1alpha2
+kind: ClusterGroup
+metadata:
+  name: ip-block-cluster-group
+spec:
+  ipBlock:
+    cidr: 10.0.10.0/24

@@ -1,0 +1,12 @@
+#cluster group with selectors
+apiVersion: core.antrea.tanzu.vmware.com/v1alpha2
+kind: ClusterGroup
+metadata:
+  name: cluster-group-01
+spec:
+  podSelector:
+    matchLabels:
+      role: server
+  namespaceSelector:
+    matchLabels:
+      env: prod
