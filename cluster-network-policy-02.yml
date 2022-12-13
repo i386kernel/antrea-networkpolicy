@@ -6,23 +6,23 @@ spec:
   priority: 8
   tier: securityops
   appliedTo:
-    - group: "test-cg-with-db-selector"
+    - group: "cluster-group-01"
   ingress:
     - action: Allow
       from:
-        - group: "test-cg-with-frontend-selector"
+        - group: "cluster-group-03"
       ports:
         - protocol: TCP
           port: 8080
           endPort: 9000
         - protocol: TCP
           port: 6379
-      name: AllowFromFrontend
+      name: AllowedCG
       enableLogging: false
   egress:
     - action: Drop
       to:
-        - group: "test-cg-with-ip-block"  
+        - group: "ip-block-cluster-group"
       ports:
         - protocol: TCP
           port: 5978

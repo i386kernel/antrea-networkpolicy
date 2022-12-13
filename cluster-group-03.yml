@@ -3,7 +3,6 @@ kind: ClusterGroup
 metadata:
   name: cluster-group-svc
 spec:
-  # ServiceReference cannot be set along with PodSelector, NamespaceSelector or ipBlock.
   serviceReference:
     name: test-service
     namespace: default

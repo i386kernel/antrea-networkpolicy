@@ -2,7 +2,7 @@
 apiVersion: crd.antrea.io/v1alpha1
 kind: ClusterNetworkPolicy
 metadata:
-  name: acnp-with-stand-alone-selectors
+  name: acnp-with-selectors
 spec:
   priority: 5
   tier: securityops
